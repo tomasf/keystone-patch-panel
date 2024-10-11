@@ -5,4 +5,4 @@ This 1U patch panel is designed for mounting keystone modules and is available i
 This model is fully parametric and written in SwiftSCAD, allowing you to easily adjust parameters in the source code to fit your exact needs.
 
 This model uses [SwiftSCAD](https://github.com/tomasf/SwiftSCAD) and [my Keystone library](https://github.com/tomasf/Keystone).
-Also available on [Printables](https://www.printables.com/model/1035553-keystone-box).
+Also available on [Printables](https://www.printables.com/model/1036170-keystone-patch-panel).
