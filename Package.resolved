@@ -1,0 +1,42 @@
+{
+  "originHash" : "a9229dc3bcce77447ac30188892de15568fdc52a27fd1444805fc6789ea14f03",
+  "pins" : [
+    {
+      "identity" : "keystone",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomasf/Keystone.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "1fe5d9ac2e05362d19c66af53c4c1408b095ec76"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "671108c96644956dddcd89dd59c203dcdb36cec7",
+        "version" : "1.1.4"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "9cb486020ebf03bfa5b5df985387a14a98744537",
+        "version" : "1.6.1"
+      }
+    },
+    {
+      "identity" : "swiftscad",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomasf/SwiftSCAD.git",
+      "state" : {
+        "revision" : "d874d042c45046f1f87b4e27bc27ddd292fa874a",
+        "version" : "0.7.1"
+      }
+    }
+  ],
+  "version" : 3
+}
