@@ -18,7 +18,7 @@ await Project {
         @Parameter("Strain relief", description: "Add a shelf behind the slots to tie cables to")
         var useStrainRelief = false
 
-        @Parameter("Tolerance", in: 0...0.6, step: 0.05, unit: "mm", description: "Extra clearance for the modules and the rack's screws")
+        @Parameter("Tolerance", in: 0...0.6, step: 0.05, unit: "mm", description: "Extra clearance for the modules and the rack's screws. The default usually works fine.")
         var tolerance = 0.3
 
         Environment {
