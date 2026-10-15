@@ -2,7 +2,7 @@ import Foundation
 import Cadova
 import Keystone
 
-struct PatchPanel: Shape3D {
+struct PatchPanel: Geometry3D {
     let width: Double
     let slotWidth: Double
     let useStrainRelief: Bool
@@ -44,7 +44,7 @@ struct PatchPanel: Shape3D {
         let bodyFullSlotSpaceLength = bodySize.x - slotWidth - 2 * braceThickness
 
         Rectangle(size)
-            .applyingEdgeProfile(.fillet(radius: cornerRadius))
+            .cuttingEdgeProfile(.fillet(radius: cornerRadius))
             .aligned(at: .center)
             .subtracting {
                 Circle(diameter: effectiveHoleDiameter)
@@ -59,14 +59,14 @@ struct PatchPanel: Shape3D {
                 // Thick front
                 Box(bodySize)
                     .aligned(at: .centerXY)
-                    .applyingEdgeProfile(.fillet(radius: cornerRadius), to: .top, along: .z)
+                    .cuttingEdgeProfile(.fillet(radius: cornerRadius), on: .top, along: .z)
 
                 if useStrainRelief {
                     // Floor
                     Box(x: bodySize.x, y: floorThickness, z: slotSpaceLength + strainReliefLength)
                         .aligned(at: .centerX)
                         .translated(y: -size.y / 2)
-                        .applyingEdgeProfile(.fillet(radius: cornerRadius), to: .top, along: .y)
+                        .cuttingEdgeProfile(.fillet(radius: cornerRadius), on: .top, along: .y)
 
                     // Braces
                     Box(x: braceThickness, y: floorThickness, z: braceLength)
@@ -81,14 +81,11 @@ struct PatchPanel: Shape3D {
                     // Strain relief
                     Box(x: cableDiameter, y: strainReliefHeight, z: strainReliefLength)
                         .whileRotated(x: 90°) {
-                            $0.applyingEdgeProfile(.fillet(radius: cableDiameter / 2), to: .top)
+                            $0.cuttingEdgeProfile(.fillet(radius: cableDiameter / 2), on: .top)
                         }
                         .aligned(at: .centerX)
                         .adding {
                             Box(x: cableDiameter, y: floorThickness, z: strainReliefHeight + strainReliefLength - floorThickness)
-                                .whileRotated(x: 90°) {
-                                    $0.applyingEdgeProfile(.fillet(radius: cableDiameter / 2), to: .top)
-                                }
                                 .aligned(at: .centerX)
                                 .translated(z: -strainReliefHeight + floorThickness)
                         }
