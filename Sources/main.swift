@@ -4,15 +4,10 @@ await Project {
     await Model("patch-panel") {
         @Environment(\.buildDestination) var destination
 
-        Metadata(
-            title: "Keystone Patch Panel",
-            description: "A 1U rack panel with slots for keystone modules."
-        )
-
         @Parameter("Rack width", description: "The width of the rack the panel mounts in")
         var rackWidth = RackWidth.full
 
-        @Parameter("Slot spacing", in: 18...25, step: 0.5, unit: "mm", description: "Distance between neighboring slots")
+        @Parameter("Slot spacing", in: 18...40, step: 0.5, unit: "mm", description: "Distance between neighboring slots")
         var slotSpacing = 18.0
 
         @Parameter("Strain relief", description: "Add a shelf behind the slots to tie cables to")
@@ -30,6 +25,14 @@ await Project {
             slotWidth: slotSpacing,
             useStrainRelief: useStrainRelief,
             extraSideInset: 0
+        )
+
+        // How many slots fit follows from the width and spacing, so the description says
+        Metadata(
+            title: "Keystone Patch Panel",
+            description: "A 1U rack panel with slots for keystone modules.\n\nNumber of slots: \(panel.slotCount(tolerance: tolerance))",
+            author: "Tomas Wincent Franzén",
+            license: "MIT"
         )
 
         // The panel prints face down, but the preview stands it up, facing the camera
@@ -56,7 +59,7 @@ enum RackWidth: String, ParameterChoice {
         switch self {
         case .full: "19 inch"
         case .ten: "10 inch"
-        case .half: "Half 19 inch"
+        case .half: "Half-rack (9.5 inch)"
         }
     }
 }

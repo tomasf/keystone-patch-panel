@@ -15,10 +15,10 @@ struct PatchPanel: Geometry3D {
     let mountHoleElongation = 2.5
 
     let cornerRadius = 2.0
-    let faceThickness = 3.0
-    let floorThickness = 3.0
+    let faceThickness = 4.0
+    let floorThickness = 4.0
 
-    let braceThickness = 2.0
+    let braceThickness = 4.0
     let braceLength = 45.0
     let braceHeight = 30.0
 
@@ -33,6 +33,17 @@ struct PatchPanel: Geometry3D {
     @Environment(\.tolerance) var tolerance
     @Environment(\.keystoneSlotMetrics) var metrics
 
+    /// How far apart the first and last slot's positions can be, plus one step: the slots go at every
+    /// step from the start, as long as they're within it
+    func slotSpaceLength(tolerance: Double) -> Double {
+        width - 2 * mountWidth - tolerance * 2 - extraSideInset * 2 - slotWidth - 2 * braceThickness
+    }
+
+    /// The number of slots the panel has room for at its spacing
+    func slotCount(tolerance: Double) -> Int {
+        Array(stride(from: 0, to: slotSpaceLength(tolerance: tolerance), by: slotWidth)).count
+    }
+
     var body: any Geometry3D {
         let generousTolerance = tolerance * 2
         let size = Vector2D(width + generousTolerance, unitHeight - generousTolerance)
@@ -41,7 +52,7 @@ struct PatchPanel: Geometry3D {
         let keystoneLength = metrics.baseSize.z
         let bodySize = Vector3D(x: width - 2 * mountWidth - generousTolerance - extraSideInset * 2, y: size.y, z: keystoneLength)
 
-        let bodyFullSlotSpaceLength = bodySize.x - slotWidth - 2 * braceThickness
+        let bodyFullSlotSpaceLength = slotSpaceLength(tolerance: tolerance)
 
         Rectangle(size)
             .cuttingEdgeProfile(.fillet(radius: cornerRadius))
