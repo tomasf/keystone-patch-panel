@@ -7,4 +7,4 @@ Try it in your browser with the [web customizer](https://tomasf.github.io/keysto
 This model is fully parametric and written in Cadova, allowing you to easily adjust parameters in the source code to fit your exact needs.
 
 This model uses [Cadova](https://github.com/tomasf/Cadova) and [my Keystone library](https://github.com/tomasf/Keystone).
-Also available on [Printables](https://www.printables.com/model/1036170-keystone-patch-panel).
+Also available on [MakerWorld](https://makerworld.com/en/models/1896205-keystone-patch-panel).
